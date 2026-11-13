@@ -49,8 +49,7 @@ analyse hors-ligne), a identifié et attribué un **maliciel actif** :
 - **Empreinte MD5** calculée et consignée → garantit l'intégrité / la non-altération de la preuve.
 - Collecte DFIR ORC : **MFT** (559 456 entrées), journaux `.evtx`, ruches `SYSTEM/SOFTWARE/SAM/SECURITY`, `NTUSER.DAT`, **Prefetch**, **Amcache**.
 
-<!-- Capture : clonage + hash d'intégrité -->
-![Acquisition et hash d'intégrité](screenshots/01-acquisition-hash.png)
+![Acquisition et hash d'intégrité](01-acquisition-hash.png)
 
 > Principe forensique : l'analyse ne porte **jamais** sur le disque original, uniquement sur des
 > copies dont l'intégrité est prouvée par empreinte.
@@ -70,8 +69,7 @@ plusieurs outils (`NTFSInfo`, `GetThis`, `RegInfo`…) et produit une collecte s
 .\DFIR-ORC.exe GetThis /nolimits /Sample=*.evtx /Out=C:\or-output\evtx.7z c:\Windows\System32\winevt\Logs
 ```
 
-<!-- Capture : collecte DFIR ORC en cours -->
-![Collecte DFIR ORC](screenshots/02-collecte-dfir-orc.png)
+![Collecte DFIR ORC](02-collecte-dfir-orc.png)
 
 ---
 
@@ -86,8 +84,7 @@ L'analyse de la MFT fait ressortir un exécutable anormal dans le profil de `STA
 - **Emplacement** : `AppData\Roaming` → répertoire d'écriture utilisateur typique d'une persistance.
 - **Timestomping** (T1070.006) : divergence des horodatages `$STANDARD_INFO` / `$FILE_NAME`.
 
-<!-- Capture : ntuser.exe dans la MFT -->
-![Découverte de ntuser.exe dans la MFT](screenshots/03-mft-ntuser.png)
+![Découverte de ntuser.exe dans la MFT](03-mft-ntuser.png)
 
 ### 5.2 Prefetch — preuve d'exécution
 
@@ -95,8 +92,7 @@ Le fichier `NTUSER.EXE-BA4FDFFE.pf` prouve que le binaire **a été exécuté**.
 exécutions révèle aussi l'usage d'utilitaires compatibles avec une activité malveillante
 (`wevtutil`, `schtasks`, `taskkill`, `powershell`).
 
-<!-- Capture : prefetch NTUSER.EXE -->
-![Preuve d'exécution via Prefetch](screenshots/04-prefetch.png)
+![Preuve d'exécution via Prefetch](04-prefetch.png)
 
 ### 5.3 Amcache — empreinte & attribution
 
@@ -110,13 +106,11 @@ l'identification **même sans disposer du fichier**.
 | `LinkDate` | 26/05/2025 12:42:12 |
 | `OriginalFileName` | *(absent — indice de malveillance)* |
 
-<!-- Capture : entrée Amcache + SHA1 -->
-![Empreinte SHA-1 via Amcache](screenshots/05-amcache-sha1.png)
+![Empreinte SHA-1 via Amcache](05-amcache-sha1.png)
 
 ### 5.4 Attribution — VirusTotal
 
-<!-- Capture : page VirusTotal 38/69 -->
-![Analyse VirusTotal — 38/69 malveillant](screenshots/06-virustotal.png)
+![Analyse VirusTotal — 38/69 malveillant](06-virustotal.png)
 
 - **38 / 69** moteurs antivirus → **malveillant**.
 - **PyInstaller** : maliciel Python empaqueté (explique la taille de ~9 Mo).
