@@ -9,6 +9,7 @@
 **Outils :** DFIR ORC v10.4.0 · Tsurugi Linux · hivexregedit · RegRipper · VirusTotal
 
 📄 **[Rapport d'investigation complet (PDF)](./Rapport_DFIR_WIN10MAG.pdf)**
+🧬 **[Analyse statique du maliciel — retrouver le code source](./analyse-malware/README.md)**
 
 ---
 
